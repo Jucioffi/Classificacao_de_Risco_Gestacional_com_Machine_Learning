@@ -10,7 +10,7 @@ Dataset
 
 O conjunto de dados utilizado é o "Maternal Health Risk Data Set". Ele contém dados anônimos sobre os sinais vitais de gestantes.
 
-Fonte: Maternal Health Risk Data Set - https://github.com/Jucioffi/Classificacao_de_Risco_Gestacional_com_Machine_Learning/blob/main/Maternal%20Health%20Risk%20DataSet.xlsx
+Fonte: Maternal Health Risk Data Set: https://github.com/Jucioffi/Classificacao_de_Risco_Gestacional_com_Machine_Learning/blob/main/Maternal%20Health%20Risk%20DataSet.xlsx
 
 As variáveis utilizadas:
 
