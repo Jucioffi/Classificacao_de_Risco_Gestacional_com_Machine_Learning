@@ -1,4 +1,4 @@
-# MVP - Classificacao_de_Risco_Gestacional_com_Machine_Learning
+# Classificacao_de_Risco_Gestacional_com_Machine_Learning
 
 Visão Geral do Projeto
 
