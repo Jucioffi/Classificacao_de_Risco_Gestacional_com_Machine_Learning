@@ -2,9 +2,17 @@
 
 Visão Geral do Projeto
 
-Este projeto apresenta uma solução completa de Machine Learning para a classificação do risco gestacional. O objetivo principal é desenvolver um modelo preditivo robusto, capaz de classificar gestantes em três níveis de risco — baixo, médio e alto — com base em seus dados vitais (idade, pressão arterial, glicemia, etc.).
+Apresentar uma solução de Machine Learning para classificar gestantes em três níveis de risco — baixo, médio e alto — a partir de dados vitais (idade, pressão arterial, glicemia, etc.).
 
-O foco estratégico do projeto é maximizar a identificação correta de pacientes de alto risco, fornecendo uma ferramenta de apoio à decisão para a priorização de cuidados médicos. O modelo campeão, Random Forest, alcançou um F1-Score (macro) de 91% em dados de teste, demonstrando alta eficácia.
+O objetivo do projeto foi maximizar a identificação correta de pacientes de alto risco, oferecendo uma ferramenta de apoio à decisão clínica. seguindo os critérios:
+
+1. Desenvolvimento de modelo preditivo para risco gestacional;
+
+2. Avaliação de múltiplos algoritmos (Logistic Regression, Random Forest, Gradient Boosting);
+
+3. Foco em sensibilidade (Recall) da classe de alto risco;
+
+4. Uso de técnicas de pré-processamento, padronização e balanceamento (SMOTE).
 
 # Dataset
 
@@ -12,21 +20,21 @@ O conjunto de dados utilizado é o "Maternal Health Risk Data Set". Ele contém 
 
 Fonte: Maternal Health Risk Data Set: https://github.com/Jucioffi/Classificacao_de_Risco_Gestacional_com_Machine_Learning/blob/main/Maternal%20Health%20Risk%20DataSet.xlsx
 
-As variáveis utilizadas:
+Variáveis
 
-Age: Idade da gestante (em anos).
+* Age: Idade da gestante (anos);
 
-SystolicBP: Pressão Arterial Sistólica (em mm Hg) - Corresponde ao valor máximo da pressão arterial durante a contração do coração.
+* SystolicBP: Pressão arterial sistólica (mm Hg);
 
-DiastolicBP: Pressão Arterial Diastólica (em mm Hg) - Corresponde ao valor mínimo da pressão arterial durante o relaxamento do coração.
+* DiastolicBP: Pressão arterial diastólica (mm Hg);
 
-BS: Nível de Glicose no Sangue (Glicemia) - Mede a concentração de açúcar no sangue.
+* BS: Glicemia (nível de glicose no sangue);
 
-BodyTemp: Temperatura Corporal.
+* BodyTemp: Temperatura corporal (°C);
 
-HeartRate: Frequência Cardíaca (em batimentos por minuto - bpm).
+* HeartRate: Frequência cardíaca (bpm);
 
-RiskLevel: Nível de Risco Gestacional (Variável-Alvo) - A categoria de risco associada à saúde da gestante (low risk, mid risk, high risk).
+* RiskLevel: Variável alvo (baixo, médio, alto risco).
 
 # Bibliotecas utilizadas
 
@@ -38,9 +46,27 @@ Matplotlib: A principal biblioteca para a criação de gráficos. Foi usada para
 
 Seaborn: Construída sobre o Matplotlib, foi utilizada para criar visualizações estatísticas mais complexas e esteticamente aprimoradas, como a matriz de correlação (heatmap), os boxplots e os histogramas detalhados da análise exploratória.
 
-Scikit-learn (sklearn): A biblioteca central para todo o fluxo de Machine Learning. Seus módulos foram essenciais para;
+Scikit-learn (sklearn): A biblioteca central para todo o fluxo de Machine Learning. As principais funções foram:
 
-# Resultados da Comparação de Modelos
+* model_selection: divisão treino/validação/teste;
+
+* preprocessing: padronização (StandardScaler);
+
+* impute: tratamento de valores ausentes (SimpleImputer);
+
+* pipeline / compose: pipelines reprodutíveis;
+
+* linear_model e ensemble: Logistic Regression, RandomForestClassifier, GradientBoostingClassifier;
+
+* metrics: avaliação de desempenho;
+
+* inspection: permutation importance;
+
+* Imbalanced-learn (SMOTE): balanceamento de classes;
+
+* Joblib: salvamento do modelo final.
+
+# Comparação de Modelos
    
 Três modelos foram comparados utilizando o conjunto de validação para uma seleção justa e imparcial. O objetivo era encontrar o modelo que não apenas tivesse a melhor performance geral (medida pelo F1-Score macro), mas que também atendesse à meta de negócio de atingir um Recall de pelo menos 85% para a classe de alto risco (high risk).
 
@@ -48,29 +74,19 @@ Os resultados no conjunto:
 
 Modelo	F1-Score (macro)	Recall (high risk);
 
-Random Forest	0.916	0.882;
+<img width="671" height="150" alt="image" src="https://github.com/user-attachments/assets/2744ea2f-5f0f-4601-93e8-54ed7453b99f" />
 
-Gradient Boosting	0.893	0.941;
-
-Logistic Regression	0.655	0.588.
-
-# Avaliação com o modelo Random Forest - Modelo com melhor adequacao
- 
 O modelo Random Forest foi então submetido a uma avaliação final no conjunto de teste, que continha dados completamente novos para o modelo. Os resultados confirmaram sua alta performance e capacidade de generalização.
 
-Relatório de Classificação Final (Conjunto de Teste):
+# Classificação do Conjunto de Testes:
 
-Classe	Precisão	Recall	F1-Score
+<img width="618" height="233" alt="image" src="https://github.com/user-attachments/assets/d941e83d-838c-4f5f-86fe-2b2e5c42dce9" />
 
-low risk	0.95	0.95	0.95;
+O modelo final alcançou F1-Score Ponderado de 91%, indicando excelente desempenho geral.
 
-mid risk	0.86	0.82	0.84;
+O Recall para a classe High Risk foi de 93%, superando a meta de negócio de 85% e garantindo alta sensibilidade na identificação de gestantes de alto risco.
 
-high risk	0.90	0.93	0.91;
-
-Média Macro	0.90	0.90	0.90;
-
-Média Ponderada	0.91	0.91	0.91.
+As métricas para a classe Low Risk mostram desempenho consistente e equilibrado, enquanto a classe Mid Risk apresentou valores levemente inferiores, indicando espaço para melhorias com novos atributos ou maior volume de dados.
 
 # Análise dos Resultados:
 
@@ -81,14 +97,7 @@ Três modelos foram comparados utilizando o conjunto de validação para uma sel
 
 Os resultados no conjunto de validação foram:
 
-Modelo	F1-Score (macro)	Recall (high risk)
-
-Random Forest	0.916	0.882;
-
-Gradient Boosting	0.893	0.941;
-
-Logistic Regression	0.655	0.588.
-
+<img width="589" height="155" alt="image" src="https://github.com/user-attachments/assets/5c939c40-64c5-4c5b-a5ec-ca6e23c6453e" />
 
 # Conclusões:
 
@@ -99,17 +108,8 @@ O modelo Random Forest foi então submetido a uma avaliação final no conjunto 
 
 Relatório de Classificação Final (Conjunto de Teste):
 
-Classe	Precisão	Recall	F1-Score
+<img width="590" height="227" alt="image" src="https://github.com/user-attachments/assets/6e691740-7e7c-4f68-9996-77787d9d0be9" />
 
-low risk	0.95	0.95	0.95;
-
-mid risk	0.86	0.82	0.84;
-
-high risk	0.90	0.93	0.91;
-
-Média Macro	0.90	0.90	0.90;
-
-Média Ponderada	0.91	0.91	0.91.
 
 O desempenho no conjunto de teste foi excelente. O modelo alcançou um F1-Score Ponderado de 91%, mostrando que é altamente eficaz. Mais importante, para a classe high risk, o modelo obteve um Recall de 93%, superando a meta de negócio e demonstrando que é extremamente confiável para sua principal função: identificar corretamente as gestantes de alto risco.
 
